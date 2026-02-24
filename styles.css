@@ -161,8 +161,6 @@ main {
 .hero {
     position: relative;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
     text-align: center;
     padding: 10rem 2rem;
     min-height: 70vh;
@@ -175,7 +173,6 @@ main {
     background-position: center;
     background-repeat: no-repeat;
     overflow: hidden;
-    box-sizing: border-box;
 }
 
 .hero::before {
@@ -192,33 +189,35 @@ main {
     width: min(920px, calc(100% - 2rem));
     padding: 2.25rem 2.5rem;
     border-radius: 16px;
-    background: rgba(0, 0, 0, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
 }
 
-.hero h1,
-.hero p,
-.hero .social-icons {
+.hero-card h1,
+.hero-card p,
+.hero-card .social-icons {
     position: relative;
     z-index: 1;
 }
 
-.hero h1 {
+.hero-card h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text-muted) 100%);
+    color: #e8e8ed;
+    background: linear-gradient(135deg, #e8e8ed 0%, #a5a5b5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.hero p {
+.hero-card p {
     font-size: 1.25rem;
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 2rem;
 }
 
@@ -1052,10 +1051,14 @@ main {
 }
 
 .about-hero {
+    position: relative;
     width: 100%;
     line-height: 0;
     max-height: 55vh;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .about-hero img {
@@ -1068,7 +1071,7 @@ main {
 
 .about-banner {
     background: #3d3d3d;
-    padding: 1.25rem 1.5rem;
+    padding: 1.5rem 1.5rem;
     text-align: center;
 }
 
@@ -1082,21 +1085,22 @@ main {
 }
 
 .about-mission {
-    max-width: 1100px;
+    max-width: 720px;
     margin: 0 auto;
     padding: 4rem 1.5rem;
     margin-bottom: 3rem;
+    text-align: center;
 }
 
 .about-mission-inner {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 2.5rem;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
 }
 
 .about-mission-logo {
-    width: 110px;
+    width: 120px;
     flex-shrink: 0;
 }
 
@@ -1107,13 +1111,14 @@ main {
 }
 
 .about-mission-text {
-    max-width: 52ch;
+    max-width: 58ch;
 }
 
 .about-mission-text p {
     color: #4a4a4a;
-    margin-bottom: 1.35rem;
-    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    text-align: center;
 }
 
 .about-mission-text p:last-child {
@@ -1237,22 +1242,35 @@ main {
 }
 
 .about-history-photo {
+    justify-self: start;
+    min-width: 0;
+}
+
+.about-history-photo figure {
+    margin: 0;
     width: var(--about-img-size);
     max-width: 100%;
     min-width: 0;
-    aspect-ratio: 4 / 3;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    justify-self: start;
     box-sizing: border-box;
 }
 
-.about-history-photo img {
+.about-history-photo figure > img {
     width: 100%;
-    height: 100%;
     display: block;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.about-history-photo figcaption {
+    display: block;
+    text-align: center;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #1a1a20;
+    margin-top: 0.75rem;
+    letter-spacing: 0.02em;
 }
 
 .about-history-2 {
@@ -1285,21 +1303,20 @@ main {
     width: var(--about-img-size);
     max-width: 100%;
     min-width: 0;
-    aspect-ratio: 4 / 3;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
 }
 
-.about-history-2-photo img {
+.about-history-2-photo figure > img {
     width: 100%;
-    height: 100%;
     display: block;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .about-history-2-photo figcaption {
+    display: block;
     text-align: center;
     font-size: 0.875rem;
     font-weight: 600;
@@ -1331,21 +1348,21 @@ main {
     width: var(--about-img-size);
     max-width: var(--about-img-size);
     min-width: 0;
+    box-sizing: border-box;
+}
+
+.about-timeline-row figure > img {
+    width: 100%;
+    display: block;
     aspect-ratio: 4 / 3;
+    object-fit: cover;
     border-radius: 10px;
-    overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     background: #f0f0f0;
 }
 
-.about-timeline-row img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-}
-
 .about-timeline-row figcaption {
+    display: block;
     text-align: center;
     font-size: 0.9375rem;
     font-weight: 600;
@@ -1393,23 +1410,23 @@ main {
     width: var(--about-img-size);
     max-width: 100%;
     min-width: 0;
-    aspect-ratio: 4 / 3;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
 }
 
-.about-final-left img,
-.about-final-right img {
+.about-final-left figure > img,
+.about-final-right figure > img {
     width: 100%;
-    height: 100%;
     display: block;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .about-final-left figcaption,
 .about-final-right figcaption {
+    display: block;
+    text-align: center;
     font-size: 0.875rem;
     font-weight: 600;
     color: #1a1a20;
@@ -1447,7 +1464,6 @@ main {
     }
 
     .about-mission-inner {
-        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 
