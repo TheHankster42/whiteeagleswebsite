@@ -1085,6 +1085,7 @@ main {
     max-width: 1100px;
     margin: 0 auto;
     padding: 4rem 1.5rem;
+    margin-bottom: 3rem;
 }
 
 .about-mission-inner {
@@ -1119,12 +1120,18 @@ main {
     margin-bottom: 0;
 }
 
+/* Wrapper so the flag can sit behind the section and extend above/below */
+.about-red-bars-flag-wrap {
+    position: relative;
+    width: 100%;
+}
+
 .about-red-bars {
     position: relative;
+    z-index: 1;
     max-width: 820px;
     margin: 0 auto;
     padding: 3rem 3.25rem 3.5rem;
-    background: #f8f8f8;
 }
 
 .about-red-bar {
@@ -1147,6 +1154,10 @@ main {
 .about-red-bars-content {
     position: relative;
     z-index: 1;
+    background: #f8f8f8;
+    padding: 3rem 3.25rem 3.5rem;
+    margin: -3rem -3.25rem -3.5rem -3.25rem;
+    box-sizing: content-box;
 }
 
 .about-red-bars-content p {
@@ -1159,10 +1170,39 @@ main {
     margin-bottom: 0;
 }
 
+/* Polish flag behind the gray box: extends above and below it, full width of white page */
+.about-polish-flag {
+    position: absolute;
+    top: -4rem;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: calc(100% + 8rem);
+    z-index: 0;
+    border: 2px solid #000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.about-polish-flag-white {
+    flex: 1;
+    background: #fff;
+    min-height: 0;
+}
+
+.about-polish-flag-red {
+    flex: 1;
+    background: #dc2626;
+    min-height: 0;
+}
+
 .about-history {
     max-width: 1100px;
     margin: 0 auto;
     padding: 4rem 1.5rem;
+    margin-top: 3rem;
 }
 
 .about-history-title {
