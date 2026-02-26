@@ -70,10 +70,23 @@ function updateProgramYears() {
     if (infoProgramsBirth) infoProgramsBirth.textContent = birthYearsLabel;
 }
 
+// Update footer copyright: "© 2025" or "© 2025 – 2026" (year made to current year)
+function updateFooter() {
+    var el = document.getElementById('footer-copy');
+    if (!el) return;
+    var yearMade = (window.SITE_CONFIG && window.SITE_CONFIG.yearMade !== undefined)
+        ? window.SITE_CONFIG.yearMade
+        : new Date().getFullYear();
+    var current = new Date().getFullYear();
+    var range = yearMade === current ? String(current) : yearMade + ' – ' + current;
+    el.textContent = '© ' + range + ' White Eagles. All rights reserved.';
+}
+
 // Load sponsors and update program years when page loads
 function init() {
     loadSponsors();
     updateProgramYears();
+    updateFooter();
 }
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

@@ -6,6 +6,16 @@
 window.SITE_CONFIG = {
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // COPYRIGHT (footer on every page)
+  // ═══════════════════════════════════════════════════════════════════════════
+  //
+  // Year the site was first published. The footer shows:
+  //   – "© 2025 White Eagles..." when current year equals yearMade
+  //   – "© 2025 – 2026 White Eagles..." when current year is later
+  //
+  yearMade: 2026,
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // SPONSORS (shown on the home page)
   // ═══════════════════════════════════════════════════════════════════════════
   //
