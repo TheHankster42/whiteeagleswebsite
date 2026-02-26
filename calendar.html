@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar - White Eagles European Soccer Academy</title>
+    <title>Calendar - White Eagles</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="calendar-page">
@@ -13,13 +13,14 @@
         <nav class="nav">
             <a href="index.html" class="logo">
                 <img src="assets/logo/logo.png" alt="White Eagles" class="logo-img">
-                <span class="logo-text">Site Name</span>
+                <span class="logo-text">White Eagles</span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="programs.html">Programs</a></li>
                 <li><a href="volunteer.html">Volunteer</a></li>
                 <li><a href="about-us.html">About Us</a></li>
+                <li><a href="rules.html">Rules &amp; Regulations</a></li>
                 <li><a href="calendar.html">Calendar</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -39,10 +40,15 @@
 
         <section class="content">
             <div class="calendar-wrap">
-                <p class="calendar-intro">Practices, games, and club events.</p>
-                <!-- To use your own Google Calendar: Settings → your calendar → Integrate calendar → copy the calendar ID. Replace YOUR_CALENDAR_ID below (use %40 for @ in the ID). -->
+                <p class="calendar-intro">Practices, games, and club events. Switch calendars below.</p>
+                <div class="calendar-switcher" role="tablist" aria-label="Choose calendar">
+                    <button type="button" class="calendar-tab active" data-calendar="main" aria-selected="true">Main</button>
+                    <button type="button" class="calendar-tab" data-calendar="u56" aria-selected="false">U5–U6</button>
+                    <button type="button" class="calendar-tab" data-calendar="u710" aria-selected="false">U7–U10</button>
+                </div>
                 <div class="calendar-embed" aria-label="Google Calendar">
                     <iframe
+                        id="calendar-iframe"
                         src="https://calendar.google.com/calendar/embed?src=3b9f3c59dafd95bd7484b2b547a47dab6626a6e8eae5f4dc643530042e528107%40group.calendar.google.com&ctz=America%2FEdmonton"
                         title="White Eagles calendar"
                         width="100%"
@@ -52,14 +58,35 @@
                         style="border: 0">
                     </iframe>
                 </div>
+                <p class="calendar-note">Add more calendar IDs in the list below (in calendar.html and script.js) to show more options.</p>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2025 White Eagles European Soccer Academy. All rights reserved.</p>
+        <p>&copy; 2025 White Eagles. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        (function() {
+            var calendars = {
+                main: '3b9f3c59dafd95bd7484b2b547a47dab6626a6e8eae5f4dc643530042e528107%40group.calendar.google.com',
+                u56: '3b9f3c59dafd95bd7484b2b547a47dab6626a6e8eae5f4dc643530042e528107%40group.calendar.google.com',
+                u710: '3b9f3c59dafd95bd7484b2b547a47dab6626a6e8eae5f4dc643530042e528107%40group.calendar.google.com'
+            };
+            var iframe = document.getElementById('calendar-iframe');
+            var baseUrl = 'https://calendar.google.com/calendar/embed?ctz=America%2FEdmonton&src=';
+            document.querySelectorAll('.calendar-tab').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var id = this.getAttribute('data-calendar');
+                    if (!id || !calendars[id]) return;
+                    document.querySelectorAll('.calendar-tab').forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+                    this.classList.add('active'); this.setAttribute('aria-selected', 'true');
+                    if (iframe) iframe.src = baseUrl + calendars[id];
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
