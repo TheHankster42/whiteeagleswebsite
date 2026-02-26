@@ -672,6 +672,8 @@ main {
     min-height: 600px;
     max-width: 1400px;
     margin: 0 auto;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
 }
 
 .program-left {
@@ -823,12 +825,15 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 0;
+    background: #dc2626;
 }
 
 .program-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
 }
 
 
