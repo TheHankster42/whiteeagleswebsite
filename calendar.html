@@ -41,15 +41,10 @@
         <section class="content">
             <div class="calendar-wrap">
                 <p class="calendar-intro">Practices, games, and club events. Switch calendars below.</p>
-                <div class="calendar-switcher" role="tablist" aria-label="Choose calendar">
-                    <button type="button" class="calendar-tab active" data-calendar="main" aria-selected="true">Main</button>
-                    <button type="button" class="calendar-tab" data-calendar="u56" aria-selected="false">U5–U6</button>
-                    <button type="button" class="calendar-tab" data-calendar="u710" aria-selected="false">U7–U10</button>
-                </div>
+                <div class="calendar-switcher" role="tablist" aria-label="Choose calendar" id="calendar-tabs"></div>
                 <div class="calendar-embed" aria-label="Google Calendar">
                     <iframe
                         id="calendar-iframe"
-                        src="https://calendar.google.com/calendar/embed?src=3b9f3c59dafd95bd7484b2b547a47dab6626a6e8eae5f4dc643530042e528107%40group.calendar.google.com&ctz=America%2FEdmonton"
                         title="White Eagles calendar"
                         width="100%"
                         height="600"
@@ -58,7 +53,7 @@
                         style="border: 0">
                     </iframe>
                 </div>
-                <p class="calendar-note">Add more calendar IDs in the list below (in calendar.html and script.js) to show more options.</p>
+                <p class="calendar-note" id="calendar-note">Switch between the calendars using the tabs above.</p>
             </div>
         </section>
     </main>
@@ -67,24 +62,39 @@
         <p>&copy; 2025 White Eagles. All rights reserved.</p>
     </footer>
 
+    <script src="site-config.js"></script>
     <script src="script.js"></script>
     <script>
         (function() {
-            var calendars = {
-                main: '3b9f3c59dafd95bd7484b2b547a47dab6626a6e8eae5f4dc643530042e528107%40group.calendar.google.com',
-                u56: '3b9f3c59dafd95bd7484b2b547a47dab6626a6e8eae5f4dc643530042e528107%40group.calendar.google.com',
-                u710: '3b9f3c59dafd95bd7484b2b547a47dab6626a6e8eae5f4dc643530042e528107%40group.calendar.google.com'
-            };
-            var iframe = document.getElementById('calendar-iframe');
+            // Calendar list is loaded from site-config.js – edit that file to add/remove calendars.
+            var calendarList = (window.SITE_CONFIG && window.SITE_CONFIG.calendarList) || [];
+
             var baseUrl = 'https://calendar.google.com/calendar/embed?ctz=America%2FEdmonton&src=';
-            document.querySelectorAll('.calendar-tab').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    var id = this.getAttribute('data-calendar');
-                    if (!id || !calendars[id]) return;
-                    document.querySelectorAll('.calendar-tab').forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-                    this.classList.add('active'); this.setAttribute('aria-selected', 'true');
-                    if (iframe) iframe.src = baseUrl + calendars[id];
-                });
+            var tabsEl = document.getElementById('calendar-tabs');
+            var iframe = document.getElementById('calendar-iframe');
+
+            if (!tabsEl || !iframe || calendarList.length === 0) return;
+
+            calendarList.forEach(function(cal, index) {
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'calendar-tab' + (index === 0 ? ' active' : '');
+                btn.setAttribute('data-calendar-index', index);
+                btn.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+                btn.textContent = cal.name;
+                tabsEl.appendChild(btn);
+            });
+
+            if (iframe) iframe.src = baseUrl + calendarList[0].id;
+
+            tabsEl.addEventListener('click', function(e) {
+                var btn = e.target.closest('.calendar-tab');
+                if (!btn) return;
+                var index = parseInt(btn.getAttribute('data-calendar-index'), 10);
+                if (isNaN(index) || !calendarList[index]) return;
+                tabsEl.querySelectorAll('.calendar-tab').forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+                btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
+                iframe.src = baseUrl + calendarList[index].id;
             });
         })();
     </script>

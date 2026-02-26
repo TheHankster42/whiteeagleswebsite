@@ -22,11 +22,8 @@ contactForm?.addEventListener('submit', (e) => {
     contactForm.reset();
 });
 
-// Sponsor images and links – SSPK and Polish Canadian only
-const sponsors = [
-    { file: 'sspk.png', url: 'https://spkcanada.ca/', name: 'Polish Combatants\' Association in Canada (SPK)' },
-    { file: 'polish-canadian.png', url: 'https://polishcanadianassociation.com/en/#Welcome', name: 'Polish Canadian Association' }
-];
+// Sponsors are loaded from site-config.js (edit that file to add/remove sponsors).
+const sponsors = (window.SITE_CONFIG && window.SITE_CONFIG.sponsors) || [];
 
 // Load sponsor images
 function loadSponsors() {
