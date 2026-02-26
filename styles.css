@@ -1412,6 +1412,18 @@ main {
     flex: 1;
     background: #fff;
     min-height: 0;
+    position: relative;
+}
+
+.about-flag-logo {
+    position: absolute;
+    top: 50%;
+    left: 5rem;
+    transform: translateY(-50%);
+    width: 7rem;
+    height: auto;
+    max-height: 65%;
+    object-fit: contain;
 }
 
 .about-polish-flag-red {
