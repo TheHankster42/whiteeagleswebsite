@@ -69,7 +69,10 @@
             // Calendar list is loaded from site-config.js – edit that file to add/remove calendars.
             var calendarList = (window.SITE_CONFIG && window.SITE_CONFIG.calendarList) || [];
 
-            var baseUrl = 'https://calendar.google.com/calendar/embed?ctz=America%2FEdmonton&src=';
+            // Embed URL format must match Google: ?src=ID&ctz=America%2FEdmonton (same as your iframe)
+            function calendarEmbedUrl(calId) {
+                return 'https://calendar.google.com/calendar/embed?src=' + calId + '&ctz=America%2FEdmonton';
+            }
             var tabsEl = document.getElementById('calendar-tabs');
             var iframe = document.getElementById('calendar-iframe');
 
@@ -85,7 +88,7 @@
                 tabsEl.appendChild(btn);
             });
 
-            if (iframe) iframe.src = baseUrl + calendarList[0].id;
+            if (iframe) iframe.src = calendarEmbedUrl(calendarList[0].id);
 
             tabsEl.addEventListener('click', function(e) {
                 var btn = e.target.closest('.calendar-tab');
@@ -94,7 +97,7 @@
                 if (isNaN(index) || !calendarList[index]) return;
                 tabsEl.querySelectorAll('.calendar-tab').forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
                 btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
-                iframe.src = baseUrl + calendarList[index].id;
+                iframe.src = calendarEmbedUrl(calendarList[index].id);
             });
         })();
     </script>
