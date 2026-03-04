@@ -9,7 +9,7 @@
     --color-bg: #0f0f12;
     --color-surface: #1a1a20;
     --color-text: #e8e8ed;
-    --color-text-muted: #8b8b9a;
+    --color-text-muted: #c4c4d4;
     --color-accent: #6366f1;
     --color-accent-hover: #818cf8;
     --font-sans: 'Segoe UI', system-ui, sans-serif;
@@ -826,7 +826,7 @@ main {
 }
 
 .program-dl dt {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
 }
 
@@ -838,7 +838,7 @@ main {
 
 .program-addons {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
     margin: 0;
     padding-top: 0.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -1287,17 +1287,51 @@ main {
     .volunteer-hero-image {
         grid-row: 1;
         grid-column: 1;
-        min-height: 400px;
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
     }
 
+    .volunteer-hero-image img {
+        min-height: 280px;
+        object-fit: cover;
+    }
+
+    /* On mobile, overlay becomes a normal block below the image so it fits narrow screens */
     .volunteer-hero-text {
-        grid-row: 2;
-        grid-column: 1;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        max-width: none;
+        height: auto;
+        margin: 0;
+        padding: 1.5rem 1rem;
+        box-sizing: border-box;
+    }
+
+    .volunteer-hero-text h1 {
+        font-size: 1.75rem;
+    }
+
+    .volunteer-hero-text p {
+        font-size: 1.1rem;
     }
 
     .volunteer-hero-green {
         grid-row: 3;
         grid-column: 1;
+        padding: 1.5rem 1rem;
+    }
+
+    .volunteer-hero-green .volunteer-two-column-box {
+        margin-top: 2rem;
+        gap: 1.5rem;
+    }
+
+    .volunteer-hero-green .volunteer-column {
+        padding: 1.5rem;
     }
 
     .volunteer-two-column-box {
@@ -1811,6 +1845,14 @@ main {
 
 /* Mobile */
 @media (max-width: 768px) {
+    .nav {
+        padding: 0.375rem 1rem;
+    }
+
+    .logo-img {
+        height: 40px;
+    }
+
     .nav-toggle {
         display: flex;
     }
@@ -1834,5 +1876,450 @@ main {
         transform: translateY(0);
         opacity: 1;
         visibility: visible;
+    }
+
+    .nav-links a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    main {
+        padding: 2rem 1rem;
+    }
+
+    .hero {
+        padding: 4rem 1rem;
+        min-height: 50vh;
+    }
+
+    .hero-card {
+        padding: 1.5rem 1.25rem;
+        width: calc(100% - 1rem);
+    }
+
+    .hero-card h1 {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+    }
+
+    .hero-card p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .social-icons {
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .content {
+        padding: 2rem 0;
+    }
+
+    .page-header {
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+
+    .page-header p {
+        font-size: 1rem;
+    }
+
+    .contact-page-content {
+        padding: 0 1rem 3rem;
+    }
+
+    .contact-cards-wrap {
+        gap: 1rem;
+    }
+
+    .contact-card-link {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .contact-card-link .contact-card-email {
+        font-size: 1rem;
+    }
+
+    .calendar-embed iframe {
+        min-height: 400px;
+    }
+
+    .program-section {
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+    }
+
+    .program-left {
+        padding: 2rem 1rem;
+    }
+
+    .program-title {
+        font-size: 1.75rem;
+    }
+
+    .program-block {
+        padding: 1rem 1.25rem;
+    }
+
+    .program-dl {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .info-section {
+        padding: 3rem 1rem;
+    }
+
+    .info-heading {
+        font-size: 1.75rem;
+    }
+
+    .sponsors-section {
+        padding: 3rem 1rem;
+    }
+
+    .sponsors-title {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .volunteer-cards {
+        padding: 3rem 1rem;
+    }
+
+    .volunteer-card {
+        padding: 1.5rem;
+    }
+
+    .volunteer-cta-inline {
+        padding: 2rem 1rem 3rem;
+    }
+}
+
+/* Small phones – extra spacing and typography tweaks */
+@media (max-width: 600px) {
+    .nav {
+        padding: 0.25rem 0.75rem;
+    }
+
+    main {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .hero {
+        padding: 3rem 0.75rem;
+        min-height: 45vh;
+    }
+
+    .hero-card {
+        padding: 1.25rem 1rem;
+        width: calc(100% - 0.5rem);
+    }
+
+    .hero-card h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-card p {
+        font-size: 0.9375rem;
+    }
+
+    .page-header {
+        padding: 1.5rem 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .content h2 {
+        font-size: 1.5rem;
+    }
+
+    .contact-page-content {
+        padding: 0 0.75rem 2.5rem;
+    }
+
+    .contact-card-link {
+        padding: 1.25rem 1rem;
+    }
+
+    .contact-card-link .contact-card-label {
+        font-size: 0.75rem;
+    }
+
+    .contact-card-link .contact-card-email {
+        font-size: 0.9375rem;
+        word-break: break-all;
+    }
+
+    .calendar-wrap {
+        padding: 0;
+    }
+
+    .calendar-switcher {
+        gap: 0.375rem;
+    }
+
+    .calendar-tab {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .programs-matrix.programs-outdoor-only {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .calendar-embed iframe {
+        min-height: 360px;
+    }
+
+    .program-grid {
+        gap: 1.5rem;
+    }
+
+    .program-card {
+        padding: 1.5rem;
+    }
+
+    .program-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .program-section {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .program-container {
+        padding: 0 0.75rem;
+    }
+
+    .program-left {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .program-title {
+        font-size: 1.5rem;
+    }
+
+    .program-divider {
+        width: 60px;
+        margin-bottom: 1.5rem;
+    }
+
+    .program-block {
+        padding: 0.875rem 1rem;
+    }
+
+    .program-block-title {
+        font-size: 1.1rem;
+    }
+
+    .program-dl {
+        font-size: 0.9rem;
+    }
+
+    .program-dates,
+    .program-ages {
+        font-size: 1rem;
+    }
+
+    .info-section {
+        padding: 2.5rem 0.75rem;
+    }
+
+    .info-container {
+        gap: 2.5rem;
+    }
+
+    .info-heading {
+        font-size: 1.5rem;
+    }
+
+    .info-text {
+        font-size: 1rem;
+    }
+
+    .info-btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9375rem;
+    }
+
+    .sponsors-section {
+        padding: 2.5rem 0.75rem;
+    }
+
+    .sponsors-title {
+        font-size: 1.35rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .sponsor-item {
+        height: 180px;
+        padding: 0.75rem;
+    }
+
+    .volunteer-hero-text h1 {
+        font-size: 1.5rem;
+    }
+
+    .volunteer-hero-text p {
+        font-size: 1rem;
+    }
+
+    .volunteer-hero-green {
+        padding: 1.25rem 0.75rem;
+    }
+
+    .volunteer-hero-green p {
+        font-size: 0.9375rem;
+    }
+
+    .volunteer-hero-green .volunteer-positions-heading {
+        font-size: 1.5rem;
+    }
+
+    .volunteer-hero-green .volunteer-column {
+        padding: 1.25rem;
+    }
+
+    .volunteer-hero-green .volunteer-column h3 {
+        font-size: 1rem;
+    }
+
+    .volunteer-card {
+        padding: 1.25rem;
+    }
+
+    .volunteer-card h3 {
+        font-size: 1rem;
+    }
+
+    .volunteer-card p {
+        font-size: 0.875rem;
+    }
+
+    .volunteer-cta-inline {
+        padding: 1.5rem 0.75rem 2.5rem;
+    }
+
+    .volunteer-register-btn {
+        font-size: 1rem;
+        padding: 0.875rem 2rem;
+    }
+
+    /* About page – small phones */
+    .about-banner {
+        padding: 1rem 0.75rem;
+    }
+
+    .about-banner h2 {
+        font-size: 0.9375rem;
+        letter-spacing: 0.08em;
+    }
+
+    .about-mission,
+    .about-history,
+    .about-history-2,
+    .about-history-3,
+    .about-history-4 {
+        padding: 2rem 0.75rem;
+    }
+
+    .about-mission-logo {
+        width: 80px;
+    }
+
+    .about-red-bars {
+        padding: 1.5rem 0.75rem 2rem;
+    }
+
+    .about-red-bars-content {
+        padding: 1.5rem 0.75rem 2rem;
+        margin: -1.5rem -0.75rem -2rem -0.75rem;
+    }
+
+    .about-red-bars-content p {
+        font-size: 0.9375rem;
+    }
+
+    .about-flag-logo {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 5rem;
+        max-height: 50%;
+    }
+
+    .about-history-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .about-history-grid,
+    .about-history-2-grid,
+    .about-final-grid {
+        gap: 1.5rem;
+    }
+
+    .about-history-photo figure,
+    .about-history-2-photo figure,
+    .about-final-left figure,
+    .about-final-right figure {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .about-timeline-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .about-timeline-row figure {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .about-timeline-text {
+        font-size: 0.9375rem;
+        margin: 1.5rem auto;
+        padding: 0;
+    }
+
+    .about-history-photo figcaption,
+    .about-history-2-photo figcaption,
+    .about-final-left figcaption,
+    .about-final-right figcaption,
+    .about-timeline-row figcaption {
+        font-size: 0.8125rem;
+    }
+
+    .footer {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .footer p {
+        font-size: 0.8125rem;
+    }
+
+    .form-container,
+    .contact-form,
+    .rules-cmsa-card {
+        padding: 1.25rem;
+    }
+
+    .form-container iframe {
+        min-height: 500px;
     }
 }
