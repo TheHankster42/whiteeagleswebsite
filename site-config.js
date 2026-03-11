@@ -49,9 +49,10 @@ window.SITE_CONFIG = {
   //   Group calendar:     id: 'abc123...%40group.calendar.google.com'
   //
   calendarList: [
-    { name: 'Main', id: 'whiteeagleswebsite%40gmail.com' },
+    { name: 'Youth – Main', id: 'whiteeagleswebsite%40gmail.com' },
     { name: 'U5–U6', id: 'a51b4818c29f840fa5ceafb3e7b359377b6ca7c06d889bf8f573e5eda3687604%40group.calendar.google.com' },
-    { name: 'U7–U10', id: '31a1c995f8b9113eb0fbaf33253bf0a03c39d66d3ae87c0892433383dd077a4c%40group.calendar.google.com' }
+    { name: 'U7–U10', id: '31a1c995f8b9113eb0fbaf33253bf0a03c39d66d3ae87c0892433383dd077a4c%40group.calendar.google.com' },
+    { name: 'Adult – CUSA', id: 'ADULT_CALENDAR_ID%40group.calendar.google.com' },// TODO: replace with real adult calendar ID
   ]
 
 };

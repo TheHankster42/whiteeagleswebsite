@@ -13,6 +13,42 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
+// Rules dropdown (hover on desktop, click/tap on mobile)
+const dropdownToggles = document.querySelectorAll('.nav-dropdown-toggle');
+
+dropdownToggles.forEach(toggle => {
+    const item = toggle.closest('.nav-item-has-dropdown');
+    if (!item) return;
+
+    toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.nav-item-has-dropdown.open').forEach(openItem => {
+            if (openItem !== item) openItem.classList.remove('open');
+        });
+
+        if (isOpen) {
+            item.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+        } else {
+            item.classList.add('open');
+            toggle.setAttribute('aria-expanded', 'true');
+        }
+    });
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item-has-dropdown.open').forEach(item => {
+        const toggle = item.querySelector('.nav-dropdown-toggle');
+        item.classList.remove('open');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    });
+});
+
 // Contact form handling
 const contactForm = document.querySelector('.contact-form');
 contactForm?.addEventListener('submit', (e) => {
@@ -29,7 +65,6 @@ const sponsors = (window.SITE_CONFIG && window.SITE_CONFIG.sponsors) || [];
 function loadSponsors() {
     const sponsorsGrid = document.getElementById('sponsorsGrid');
     if (!sponsorsGrid) {
-        console.error('Sponsors grid element not found');
         return;
     }
 
@@ -84,7 +119,10 @@ function updateFooter() {
 
 // Load sponsors and update program years when page loads
 function init() {
-    loadSponsors();
+    // Only attempt to load sponsors on pages that have the sponsors grid (home page)
+    if (document.getElementById('sponsorsGrid')) {
+        loadSponsors();
+    }
     updateProgramYears();
     updateFooter();
 }

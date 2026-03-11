@@ -29,10 +29,20 @@
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="programs.html">Programs</a></li>
+                <li><a href="programs.html">Youth Programs</a></li>
+                <li><a href="adult.html">Adult Soccer</a></li>
                 <li><a href="volunteer.html">Volunteer</a></li>
                 <li><a href="about-us.html">About Us</a></li>
-                <li><a href="https://calgaryminorsoccer.ottosport.ai/league/league-rules" target="_blank" rel="noopener noreferrer">Rules &amp; Regulations</a></li>
+                <li class="nav-item-has-dropdown">
+                    <button class="nav-link nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                        Rules
+                    </button>
+                    <ul class="nav-dropdown">
+                        <li><a href="https://calgaryminorsoccer.ottosport.ai/league/league-rules" target="_blank" rel="noopener noreferrer">Youth Rules (CMSA)</a></li>
+                        <li><a href="https://www.cusa.ab.ca/content/documents-amp-forms" target="_blank" rel="noopener noreferrer">Adult Rules (CUSA)</a></li>
+                        <li><a href="assets/rules/White_Eagles_Bylaws_July21_2016.pdf" download>White Eagles Bylaws (PDF)</a></li>
+                    </ul>
+                </li>
                 <li><a href="calendar.html">Calendar</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -52,8 +62,11 @@
 
         <section class="content">
             <div class="calendar-wrap">
-                <p class="calendar-intro">Practices, games, and club events. Switch calendars below.</p>
-                <div class="calendar-switcher" role="tablist" aria-label="Choose calendar" id="calendar-tabs"></div>
+                <p class="calendar-intro">Practices, games, and club events for both youth and adult White Eagles teams. Switch calendars below.</p>
+                <div id="calendar-tabs">
+                    <div class="calendar-switcher" role="tablist" aria-label="Choose youth calendar" id="calendar-tabs-youth"></div>
+                    <div class="calendar-switcher calendar-switcher-adult" role="tablist" aria-label="Choose adult calendar" id="calendar-tabs-adult"></div>
+                </div>
                 <div class="calendar-embed" aria-label="Google Calendar">
                     <iframe
                         id="calendar-iframe"
@@ -85,29 +98,46 @@
             function calendarEmbedUrl(calId) {
                 return 'https://calendar.google.com/calendar/embed?src=' + calId + '&ctz=America%2FEdmonton';
             }
-            var tabsEl = document.getElementById('calendar-tabs');
+            var tabsWrapper = document.getElementById('calendar-tabs');
+            var youthTabsEl = document.getElementById('calendar-tabs-youth');
+            var adultTabsEl = document.getElementById('calendar-tabs-adult');
             var iframe = document.getElementById('calendar-iframe');
+            var params = new URLSearchParams(window.location.search || '');
+            var desiredView = params.get('view');
 
-            if (!tabsEl || !iframe || calendarList.length === 0) return;
+            if (!tabsWrapper || !youthTabsEl || !adultTabsEl || !iframe || calendarList.length === 0) return;
+
+            var initialIndex = 0;
+            if (desiredView === 'adult') {
+                for (var i = 0; i < calendarList.length; i++) {
+                    var name = (calendarList[i].name || '').toLowerCase();
+                    if (name.indexOf('adult') === 0) {
+                        initialIndex = i;
+                        break;
+                    }
+                }
+            }
 
             calendarList.forEach(function(cal, index) {
                 var btn = document.createElement('button');
+                var isAdult = (cal.name || '').toLowerCase().indexOf('adult') === 0;
+                var parentEl = isAdult ? adultTabsEl : youthTabsEl;
                 btn.type = 'button';
-                btn.className = 'calendar-tab' + (index === 0 ? ' active' : '');
+                btn.className = 'calendar-tab ' + (isAdult ? 'calendar-tab-adult' : 'calendar-tab-youth') + (index === initialIndex ? ' active' : '');
                 btn.setAttribute('data-calendar-index', index);
-                btn.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+                btn.setAttribute('aria-selected', index === initialIndex ? 'true' : 'false');
                 btn.textContent = cal.name;
-                tabsEl.appendChild(btn);
+                parentEl.appendChild(btn);
             });
 
-            if (iframe) iframe.src = calendarEmbedUrl(calendarList[0].id);
+            if (iframe) iframe.src = calendarEmbedUrl(calendarList[initialIndex].id);
 
-            tabsEl.addEventListener('click', function(e) {
+            tabsWrapper.addEventListener('click', function(e) {
                 var btn = e.target.closest('.calendar-tab');
                 if (!btn) return;
                 var index = parseInt(btn.getAttribute('data-calendar-index'), 10);
                 if (isNaN(index) || !calendarList[index]) return;
-                tabsEl.querySelectorAll('.calendar-tab').forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+                tabsWrapper.querySelectorAll('.calendar-tab').forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
                 btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
                 iframe.src = calendarEmbedUrl(calendarList[index].id);
             });
