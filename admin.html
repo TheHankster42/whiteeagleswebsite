@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin – Events - White Eagles</title>
+    <link rel="icon" href="assets/logo/logo.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-page">
+    <div class="page-side page-side-left" aria-hidden="true"></div>
+    <div class="page-side page-side-right" aria-hidden="true"></div>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="logo">
+                <img src="assets/logo/logo.png" alt="White Eagles" class="logo-img">
+                <span class="logo-text">White Eagles</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="events.html">Events</a></li>
+                <li><a href="index.html">Back to site</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="admin-main">
+        <section class="page-header">
+            <h1>Events admin</h1>
+            <p>Sign in to add, edit, or remove events.</p>
+        </section>
+
+        <div id="admin-login-view" class="admin-view">
+            <div class="admin-login-wrap">
+                <form id="admin-login-form" class="admin-form">
+                    <label for="admin-email">Email</label>
+                    <input type="email" id="admin-email" name="email" required autocomplete="email">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" name="password" required autocomplete="current-password">
+                    <p id="admin-login-error" class="admin-error" style="display: none;"></p>
+                    <button type="submit" class="admin-btn admin-btn-primary">Sign in</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="admin-dashboard-view" class="admin-view" style="display: none;">
+            <div class="admin-dashboard-wrap">
+                <p class="admin-signed-in">Signed in. <button type="button" id="admin-sign-out" class="admin-link">Sign out</button></p>
+                <div class="admin-actions">
+                    <button type="button" id="admin-add-event" class="admin-btn admin-btn-primary">Add event</button>
+                </div>
+                <p id="admin-config-warn" class="admin-error" style="display: none;">Supabase is not configured. Edit supabase-config.js with your project URL and anon key.</p>
+                <p id="admin-list-error" class="admin-error" style="display: none;"></p>
+                <div id="admin-events-list" class="admin-events-list"></div>
+                <div id="admin-form-wrap" class="admin-form-wrap" style="display: none;">
+                    <h2 id="admin-form-title">Add event</h2>
+                    <form id="admin-event-form" class="admin-form">
+                        <input type="hidden" id="admin-event-id" name="id">
+                        <label for="admin-event-title">Title *</label>
+                        <input type="text" id="admin-event-title" name="title" required>
+                        <label for="admin-event-description">Description</label>
+                        <textarea id="admin-event-description" name="description" rows="4"></textarea>
+                        <label for="admin-event-date">Date and time *</label>
+                        <input type="datetime-local" id="admin-event-date" name="event_date" required>
+                        <label for="admin-event-location">Location</label>
+                        <input type="text" id="admin-event-location" name="location">
+                        <p id="admin-form-error" class="admin-error" style="display: none;"></p>
+                        <div class="admin-form-buttons">
+                            <button type="submit" class="admin-btn admin-btn-primary">Save</button>
+                            <button type="button" id="admin-form-cancel" class="admin-btn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p id="footer-copy"></p>
+    </footer>
+
+    <script src="site-config.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

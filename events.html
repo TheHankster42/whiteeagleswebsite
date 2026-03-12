@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rules - White Eagles</title>
+    <title>Events - White Eagles</title>
     <link rel="icon" href="assets/logo/logo.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
     <!-- Google Tag Manager -->
@@ -14,7 +14,7 @@
     })(window,document,'script','dataLayer','GTM-K6BJ526S');</script>
     <!-- End Google Tag Manager -->
 </head>
-<body>
+<body class="calendar-page">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K6BJ526S"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -38,9 +38,9 @@
                         Rules
                     </button>
                     <ul class="nav-dropdown">
-                        <li><a href="rules.html#youth">Youth Rules (CMSA)</a></li>
-                        <li><a href="rules.html#adult">Adult Rules (CUSA)</a></li>
-                        <li><a href="assets/rules/White_Eagles_Bylaws_July21_2016.pdf" download>White Eagles Bylaws (PDF)</a></li>
+                        <li><a href="https://calgaryminorsoccer.ottosport.ai/league/league-rules" target="_blank" rel="noopener noreferrer">Youth Rules (CMSA)</a></li>
+                        <li><a href="https://www.cusa.ab.ca/content/documents-amp-forms" target="_blank" rel="noopener noreferrer">Adult Rules (CUSA)</a></li>
+                        <li><a href="assets/rules/White_Eagles_Bylaws_July21_2016.pdf" target="_blank" rel="noopener noreferrer">White Eagles Bylaws (PDF)</a></li>
                     </ul>
                 </li>
                 <li><a href="events.html">Events</a></li>
@@ -57,38 +57,16 @@
 
     <main>
         <section class="page-header">
-            <h1>Rules &amp; Regulations</h1>
-            <p>White Eagles teams participate in youth and adult leagues that each have their own official rules.</p>
+            <h1>Events</h1>
+            <p>Club events, fundraisers, and more.</p>
         </section>
 
-        <section class="content" id="youth">
-            <h2>Youth Rules (CMSA)</h2>
-            <p>Youth programs at White Eagles are registered through Calgary Minor Soccer Association (CMSA). All youth league games follow CMSA rules and regulations.</p>
-            <div class="rules-cmsa-card">
-                <h2>CMSA Rules &amp; Regulations</h2>
-                <p>For full details on age groups, field sizes, game formats, and discipline, please refer to CMSA’s official rules.</p>
-                <p>
-                    <a class="rules-cmsa-link" href="https://calgaryminorsoccer.ottosport.ai/league/league-rules" target="_blank" rel="noopener noreferrer">
-                        View CMSA Rules
-                    </a>
-                </p>
-            </div>
-        </section>
-
-        <section class="content" id="adult">
-            <h2>Adult Rules (CUSA)</h2>
-            <p>Adult White Eagles teams participate in Calgary United Soccer Association (CUSA) competitions. CUSA is responsible for league rules, match procedures, and discipline for adult divisions.</p>
-            <div class="rules-cmsa-card">
-                <h2>CUSA Rules &amp; Regulations</h2>
-                <p>For the latest adult league rules, please refer to CUSA’s official documentation. This includes competition formats, player eligibility, discipline, and match day regulations.</p>
-                <p>
-                    <a class="rules-cmsa-link" href="#" target="_blank" rel="noopener noreferrer">
-                        View CUSA Rules
-                    </a>
-                </p>
-                <p style="font-size: 0.875rem; color: var(--color-text-muted); margin-top: 0.75rem;">
-                    Update this link to the official CUSA rules URL once confirmed.
-                </p>
+        <section class="content">
+            <div class="events-wrap" style="max-width: 900px; margin: 0 auto;">
+                <p id="events-loading" class="events-message">Loading events…</p>
+                <p id="events-error" class="events-message events-error" style="display: none;"></p>
+                <p id="events-empty" class="events-message" style="display: none;">No upcoming events right now. Check back soon.</p>
+                <div id="events-list" class="events-list"></div>
             </div>
         </section>
     </main>
@@ -98,7 +76,9 @@
     </footer>
 
     <script src="site-config.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
+    <script src="events.js"></script>
 </body>
 </html>
-
